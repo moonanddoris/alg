@@ -132,6 +132,11 @@ public class BinaryTree {
         return re;
     }
 
+
+    //TODO 二叉查找树 的查找 插入 删除
+
+    //TODO 分裂细胞 若干时间后的细胞个数
+
     public static void main(String[] args){
 
 

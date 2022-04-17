@@ -42,22 +42,97 @@ public class StringMatchOpt {
     }
 
     /**
-     *
+     * RK算法 使用26进制进行hash值计算
      * @param patternStr
      * @param mainStr
      * @return
      */
     public static int rKMatch(String patternStr, String mainStr){
-        //TODO 使用26进制进行计算hash值
+
+        int patternLen = patternStr.length();
+        int mainLen = mainStr.length();
+
+        if(patternLen > mainLen){
+            return -1;
+        }
+
+        // 26进制数组
+        int[] tmpData = new int[26];
+        int pre = 1;
+        for(int i=0; i< 26; i++){
+            tmpData[i] = pre;
+            pre *= 26;
+        }
+
+        char[] patternCharArray = patternStr.toCharArray();
+        char[] mainCharArray = mainStr.toCharArray();
+
+        int pattenValue = 0;
+        for(int i=0;i<patternLen;i++){
+            pattenValue += (patternCharArray[i]-'a') * tmpData[patternLen-i];
+        }
+
+        for(int i=0; i< mainLen-patternLen+1; i++){
+
+            int mainValue = 0;
+            for(int j=0; j< patternLen; j++){
+                mainValue += (mainCharArray[i+j] - 'a') * tmpData[patternLen - j];
+
+                // 如果大于，提前结束本次计算
+                if(mainValue > pattenValue){
+                    break;
+                }
+            }
+
+            if(mainValue == pattenValue){
+                return i;
+            }
+        }
+
         return -1;
     }
+
+
+    /**
+     * BM 算法-坏字符原则
+     * @param patternStr
+     * @param mainStr
+     */
+    public static void bMBadChar(String patternStr, String mainStr){
+        //TODO
+
+    }
+
+    /**
+     * BM 算法-坏字符原则
+     * @param patternStr
+     * @param mainStr
+     */
+    public static void bMGoodPostfix(String patternStr, String mainStr){
+        //TODO
+
+    }
+
+    /**
+     * KMP
+     * @param patternStr
+     * @param mainStr
+     */
+    public static void kMPMatch(String patternStr, String mainStr){
+        //TODO
+
+    }
+
 
     public static void main(String[] args){
 
         String mainStr = "bfadgiislluooww";
-        String patternStr = "ww";
+        String patternStr = "bfadg";
 
         int re = bFMatch(patternStr, mainStr);
+        System.out.println(re);
+
+        re = rKMatch(patternStr, mainStr);
         System.out.println(re);
 
     }

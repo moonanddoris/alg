@@ -37,7 +37,7 @@ cabcab
  bcab  suffix[4]=-1
 abcab  suffix[5]=-1
 
-王争老师专栏里的计算方案，是逐个取主串的前缀子串，c ca cab ... 和后缀子串进行比较，计算出suffix和prefix数组。这里比较疑惑的点是，suffix数组靠前的
+王争老师专栏里的计算方案，是逐个取主串的前缀子串，c ca cab ... 和后缀子串进行比较，计算出suffix和prefix数组。这里刚开始有个比较疑惑的点，suffix数组靠前的
 数据，会重复计算，后面计算的值会覆盖前面计算过的值。即真正的有效值是 最接近字符串末尾的。如 模式串是 cabcabcab  ，计算子串cab的时候会赋值，
 suffix[1]=2  suffix[2]=1 suffix[3]=0 prefix[3]=true  然后计算子串 cabcab时，会覆盖之前的值 suffix[1]=5 suffix[2]=4 suffix[3]=3 prefix[3]=false
 因为对于 好后缀cab来说，第二个cab才是他应该匹配的子串
@@ -47,6 +47,7 @@ suffix[1]=2  suffix[2]=1 suffix[3]=0 prefix[3]=true  然后计算子串 cabcab�
 suffix[i] = if(suffix[i]代表的子串 比 suffix[i-1]代表的子串 多出来的前面哪个字符 == suffix[i-1]值对应坐标的字符, suffix[i-1] - 1 ,-1)
 
 如 b 对应 suffix[1]=2，ab多出来的 a字符 等于下标为1(suffix[1]-1)的字符a ，所以suffix[2] = suffix[2] - 1 = 1
+这个例子也可以观察到，suffix数组的连续性 suffix[1]=2 suffix[2]=1 suffix[3]=0
 
 ### 坏字符 vs 好后缀
 在匹配过程中如何选择 坏字符原则 还是 好后缀原则呢？
@@ -81,11 +82,14 @@ next[i] = if(next[i-1]的下一个字符 == next[i]的最后一个字符 即第i
 
 ## 5.Trie树
 
-适用于前缀匹配和输入法联想的场景，如搜索框自动提示词。
-
-
+适用于前缀匹配的场景，如搜索框自动提示词、输入法联想。
 
 ## 6.AC自动机
+
+在Trie树的基础上，每个节点构建失败指针，指向它的最长匹配后缀串。
+在某个字符串匹配失败后，通过失败指针回退，并继续匹配。
+
+![](../../../../images/ac.jpeg) 
 
 
 

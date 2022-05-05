@@ -1,6 +1,9 @@
 package general_algorithm;
 
+import java.util.Arrays;
+
 /**
+ * 回溯算法：八皇后问题
  * @author lixinhai
  * @date 2022/5/3
  */
@@ -25,6 +28,8 @@ public class Exercise {
 
     public static boolean innerFunc(int[] re, int index){
         if(index == 8){
+            //打印所有符合条件的答案
+            System.out.println(Arrays.toString(re));
             return true;
         }
 
@@ -32,9 +37,13 @@ public class Exercise {
             //当前位置 如果可以放入，则继续下一行
             if(checkIsOk(index, x, re)) {
                 re[index] = x;
+                innerFunc(re, index+1);
+                /*
+                // 仅获取第一个符合条件的答案
                 if(innerFunc(re, index+1)){
                     return true;
                 }
+                */
             }
         }
 

@@ -1,6 +1,9 @@
 package general_algorithm;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 动态规划：0-1背包问题 及添加价值属性
@@ -139,6 +142,7 @@ public class Exercise3 {
         System.out.println("--------------------"+ Arrays.toString(st));
     }
 
+
     public static void main(String[] args){
 
         int limitVal = 10;
@@ -146,9 +150,7 @@ public class Exercise3 {
         int[] staffValue = {10, 10, 4, 6, 7, 1};
 
         //knapsack(10, staff);
-        knapsackPro(10, staff);
-        knapsackPro2(10, staff, staffValue);
-
-        System.out.println("----------------");
+        //knapsackPro(10, staff);
+        //knapsackPro2(10, staff, staffValue);
     }
 }

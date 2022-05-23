@@ -3,7 +3,7 @@ package leetcode;
 import java.util.Arrays;
 
 /**
- * leetcode9 回文数
+ * leetcode9 easy 回文数
  * @author lixinhai
  * @date 2022/5/20
  */

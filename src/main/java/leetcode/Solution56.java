@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 /**
- * leetcode56 合并区间
+ * leetcode56 medium 合并区间
  * @author lixinhai
  * @date 2022/5/20
  */

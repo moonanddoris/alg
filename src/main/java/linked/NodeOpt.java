@@ -96,6 +96,12 @@ public class NodeOpt {
         return slowOne;
     }
 
+    /**
+     * 删除倒数第num个节点 使用快慢指针
+     * @param head
+     * @param num
+     * @return
+     */
     public static MyNode delBackN(MyNode head, int num){
         if(num <= 0){
             return head;

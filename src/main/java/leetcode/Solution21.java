@@ -15,6 +15,7 @@ public class Solution21 {
         ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
 
+    // 自己想出来的解法，一个链表不停的插入另一个链表。比较经典的解法：1.递归法 list1.next = merge(list1.next, list2)  2.新起一个链表保存结果，遍历list1和list2，小值插入新链表
     public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         if(list1 == null){ return list2; }
         if(list2 == null){ return list1; }

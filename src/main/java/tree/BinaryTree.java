@@ -1,7 +1,6 @@
 package tree;
 
-import linked.MyNode;
-
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -107,6 +106,56 @@ public class BinaryTree {
     }
 
     /**
+     * 按层Z字形遍历 使用双向队列作为辅助存储空间
+     * flag=true 从ping左侧读取 写入pong队列
+     * flag=false 从pong右侧读取 写入ping队列
+     * 写入时，不需要更换方向
+     */
+    public static void zShapeLevelOut(TreeNode treeNode){
+        if(treeNode == null){return;}
+
+        Deque<TreeNode> pingQueue = new LinkedList<>();
+        Deque<TreeNode> pongQueue = new LinkedList<>();
+
+        pingQueue.offerFirst(treeNode);
+        boolean flag=true;
+
+        while (!pingQueue.isEmpty() || !pongQueue.isEmpty()) {
+
+            if (flag) {
+                while (!pingQueue.isEmpty()){
+                    TreeNode tmpNode = pingQueue.pollFirst();
+                    System.out.println(tmpNode.getData());
+
+                    if(tmpNode.getLeft() != null){
+                        pongQueue.offerFirst(tmpNode.getLeft());
+                    }
+                    if(tmpNode.getRight() != null){
+                        pongQueue.offerFirst(tmpNode.getRight());
+                    }
+                }
+
+                flag=false;
+
+            } else {
+                while (!pongQueue.isEmpty()){
+                    TreeNode tmpNode = pongQueue.pollLast();
+                    System.out.println(tmpNode.getData());
+
+                    if(tmpNode.getLeft() != null){
+                        pingQueue.offerFirst(tmpNode.getLeft());
+                    }
+                    if(tmpNode.getRight() != null){
+                        pingQueue.offerFirst(tmpNode.getRight());
+                    }
+                }
+
+                flag=true;
+            }
+        }
+    }
+
+    /**
      * 包含n个节点的二叉树 有多少种形态
      * @param dataNum
      * @return
@@ -153,6 +202,9 @@ public class BinaryTree {
 
         //System.out.println(getTreeCnt(6));
 
+
+        System.out.println("-------------------zShape");
+        zShapeLevelOut(testTree);
     }
 
 

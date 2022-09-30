@@ -36,6 +36,7 @@ public class Solution104 {
 
     /**
      * 迭代解法 层遍历 计算层数
+     * 以下代码可以优化，使用一个队列通过计数来实现 层数计算
      * @param root
      * @return
      */

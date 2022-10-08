@@ -41,6 +41,31 @@ public class Solution121 {
         return Math.max(Math.max(leftMax, rightMax), midMax);
     }
 
+    /**
+     * 一次遍历的方法
+     * @param prices
+     * @return
+     */
+    public static int maxProfitV2(int[] prices) {
+        if(prices.length < 1){return 0;}
+
+        int minPrice = prices[0];
+        int max = 0;
+
+        for(int i=1;i< prices.length;i++){
+            if(prices[i] > minPrice){
+                if(max < prices[i] - minPrice){
+                    max = prices[i] - minPrice;
+                }
+            }
+            else{
+                minPrice = prices[i];
+            }
+        }
+
+        return 0;
+    }
+
     public static void main(String[] args){
         int[] test = {1, 0, 11, 4, 7, 3, 10};
 

@@ -11,6 +11,11 @@ public class MyTest {
 
     public static void main(String[] args) {
 
+
+        String al = null;
+        Long ab = Long.valueOf(al);
+        System.out.println(ab);
+
         Short a = null;
         System.out.println(a == Short.valueOf((short)1));
         //System.out.println(a == new Short("1"));
@@ -23,6 +28,16 @@ public class MyTest {
 
         String s = "([)]";
         System.out.println("---------------" + s);
+
+
+        Pattern compile1 = Pattern.compile("http(.*)\\?d=([0-9]+)&c=([0-9]+)");
+        Matcher matcher1 = compile1.matcher("https://ihospital-stage.causacloud.com/miniqrcode?d=22009&c=11");
+
+        System.out.println("---------------"+matcher1.find());
+        System.out.println("---------------"+matcher1.groupCount());
+        System.out.println("---------------"+matcher1.group(2));
+
+
 
     }
 }

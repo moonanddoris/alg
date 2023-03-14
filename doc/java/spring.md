@@ -81,3 +81,8 @@ https://blog.csdn.net/qq_27579471/article/details/106839223
   * 想尝试用以下方法获取((HandlerMethod) handler).getMethodParameters(); 比较困难
   * 可能的方法，通过解析 ServleRequest来获取参数 getParameterNames and getParameterValues, or getParameterMap
   * 直接使用AOP注解，JoinPoint.getArgs 即可直接映射到入参并已经反序列化了
+
+### 关于Bean加载
+
+* @Configuration和@Bean 往往是需要注入第三方jar包的类，因为无法写@Component等注解（或者不在程序扫描目录下）。入参也会作为被依赖的Bean进行加载
+* 注入的方式有三种，构造器注入 setter注入  成员变量注解

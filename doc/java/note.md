@@ -98,3 +98,7 @@
     response.getOutputStream().write(b,0,length);
     }
 ```
+
+## 反射相关
+
+* clazz.getDeclaredMethods仅获取当前类的方法；clazz.getMethods获取当前以及父类的方法

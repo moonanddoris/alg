@@ -86,3 +86,8 @@ https://blog.csdn.net/qq_27579471/article/details/106839223
 
 * @Configuration和@Bean 往往是需要注入第三方jar包的类，因为无法写@Component等注解（或者不在程序扫描目录下）。入参也会作为被依赖的Bean进行加载
 * 注入的方式有三种，构造器注入 setter注入  成员变量注解
+* SpringBoot支持自动配置组件，形式都是 xxxAutoConfiguration 如RedisAutoConfiguration 对应的yml配置是spring.redis.xx。自动按照配置进行配置
+  * 但是SpringBoot遵循 习惯优于配置，所以往往会带着注解 @Conditionalxxx 如@ConditionalOnMissingBean
+  * 如果程序没有自定义Bean，才会执行自动config 参考<springboot 自动配置 autoConfig 全流程> https://blog.51cto.com/u_8224502/3725882?b=totalstatistic
+  * @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+  * spring-boot-autoconfigure支持自定义自动配置；其中可以指定加载顺序如 @AutoConfigureAfter @AutoConfigureBefore

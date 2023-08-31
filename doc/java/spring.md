@@ -91,3 +91,5 @@ https://blog.csdn.net/qq_27579471/article/details/106839223
   * 如果程序没有自定义Bean，才会执行自动config 参考<springboot 自动配置 autoConfig 全流程> https://blog.51cto.com/u_8224502/3725882?b=totalstatistic
   * @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
   * spring-boot-autoconfigure支持自定义自动配置；其中可以指定加载顺序如 @AutoConfigureAfter @AutoConfigureBefore
+  * 自动加载的原理 @SpringBootApplication -> @EnableAutoConfiguration -> @import -> EnableAutoConfigurationImportSelector -> SpringFactoriesLoader.loadFactoryNames方法进行扫描具有META-INF/spring.factories文件的jar包
+  * 举个例子，如果未使用自动加载，需要在启动类上使用@MapperScan，如果使用了自动加载，则在自动配置类的地方 使用@MapperScan即可

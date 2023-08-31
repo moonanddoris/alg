@@ -102,3 +102,7 @@
 ## 反射相关
 
 * clazz.getDeclaredMethods仅获取当前类的方法；clazz.getMethods获取当前以及父类的方法
+
+## MyBatis
+
+* Mapper文件中的同名方法无法重载，因为它的原理和参数无关

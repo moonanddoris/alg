@@ -2,6 +2,9 @@ package mytest;
 
 import org.apache.commons.codec.binary.Base64;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +15,19 @@ import java.util.regex.Pattern;
 public class MyTest {
 
     public static void main(String[] args) {
+
+        BigDecimal num1 = new BigDecimal("0.03");
+        BigDecimal num2 = new BigDecimal("100");
+        BigDecimal result = num1.multiply(num2).setScale(0, RoundingMode.UP); // 乘法运算并向上取整
+        System.out.println(result);
+
+
+        Date date1 = new Date(2023, 5, 1); // 第一个日期
+        Date date2 = new Date(2023,6, 30); // 第二个日期
+
+        long diffInMillies = Math.abs(date2.getTime() - date1.getTime());
+        long diffInDays = diffInMillies / (24 * 60 * 60 * 1000);
+        System.out.println(diffInDays);
 
         String username = "yiducloud";
         String password = "dmpT6l27LW";

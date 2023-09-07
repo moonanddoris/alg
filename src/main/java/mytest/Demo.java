@@ -1,7 +1,5 @@
 package mytest;
 
-import org.junit.Test;
-
 /**
  * @author lixinhai
  * @date 2023/3/27
@@ -164,7 +162,7 @@ public class Demo {
         return mobilePhone.matches(regex);
     }
 
-    @Test
+//    @Test
     public void testValidMobilePhone() {
 
         //String[] testMobilePhones = {"13022218886", "13022218887", "13022218889", "13022218890", "13022218891", "13022218892", "13022218893", "13022218894", "13022218895", "13022218896", "13022218897", "130222188}

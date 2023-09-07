@@ -106,3 +106,7 @@
 ## MyBatis
 
 * Mapper文件中的同名方法无法重载，因为它的原理和参数无关
+* springboot下mybatis一级缓存是默认开启的，且缓存级别为session（一个sqlsession有一个缓存）。二级缓存需要在mapper文件加cache标签。https://www.jianshu.com/p/407b4d8cb79b
+* 如果使用mybatis一级缓存，就一定小心不能修改mybatis mapper方法的返回值，因为mybatis一级缓存直接缓存的就是mapper方法的返回值，没有深拷贝，所以，如果有修改，后续相同查询拿到的都是修改后的脏数据。对于二级缓存，同样需要注意这个问题。
+
+

@@ -93,3 +93,30 @@ https://blog.csdn.net/qq_27579471/article/details/106839223
   * spring-boot-autoconfigure支持自定义自动配置；其中可以指定加载顺序如 @AutoConfigureAfter @AutoConfigureBefore
   * 自动加载的原理 @SpringBootApplication -> @EnableAutoConfiguration -> @import -> EnableAutoConfigurationImportSelector -> SpringFactoriesLoader.loadFactoryNames方法进行扫描具有META-INF/spring.factories文件的jar包
   * 举个例子，如果未使用自动加载，需要在启动类上使用@MapperScan，如果使用了自动加载，则在自动配置类的地方 使用@MapperScan即可
+
+### 关于Spring生命周期
+
+* ApplicationContextAware 当一个类实现了这个接口，当前bean创建时会自动调用setApplicationContext方法，把容器上下文传递进来，就可以获取到容器内所有的bean。常用来底层进行自动配置、bean初始化的操作
+* BeanFactoryAware 类似于 ApplicationContextAware，不同点是，BeanFactoryAware需要指定bean才能获取到。（而ApplicationContextAware是透明的，可以拿到所有的Bean） ApplicationContext是BeanFactory的子类
+* InitializingBean 当一个类实现了这个接口，当前bean创建时会自动调用afterPropertiesSet方法，完成自定的一些操作
+* WebMvcAutoConfiguration 源码学习 了解初始化加载过程 https://www.cnblogs.com/ruber/p/17601665.html
+  * 以下是chatGpt的回答，加深理解mvc相关配置的源码
+  ```agsl
+  org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration.EnableWebMvcConfiguration
+  org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration
+  org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport
+
+  这三个类之间的关系是什么，以及为什么这么设计的原因是什么？
+  
+  这三个类都与Spring MVC框架中的配置有关，具体的关系如下：
+
+  org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration.EnableWebMvcConfiguration：这个类是Spring Boot中用于配置Spring MVC框架的类。它继承了WebMvcConfigurationSupport类，并重写了DelegatingWebMvcConfiguration中的一些方法，从而对Spring MVC进行了自定义配置。简单来说，这个类是Spring Boot中配置Spring MVC框架的入口。
+
+  org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration：这个类是Spring MVC中的一个重要类，它实现了WebMvcConfigurer接口，并扩展了WebMvcConfigurationSupport类。它的主要作用是将用户自定义的Spring MVC配置和默认的Spring MVC配置合并在一起，从而生成最终的配置。简单来说，这个类承担了Spring MVC配置的委派和合并工作。
+
+  org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport：这个类是Spring MVC框架中的一个基础配置类，它实现了WebMvcConfigurer接口，并为Spring MVC框架提供了一些基本的默认配置。简单来说，这个类是Spring MVC框架中基础配置的实现。
+
+  这么设计的原因是，Spring MVC框架提供了很多配置选项，这些选项可以通过继承WebMvcConfigurationSupport类进行自定义配置。为了方便用户进行自定义配置，Spring Boot提供了EnableWebMvcConfiguration类，它继承了WebMvcConfigurationSupport类并进行了一些定制化配置，用户可以通过继承EnableWebMvcConfiguration进行自定义配置。而DelegatingWebMvcConfiguration类则承担了将用户自定义的配置和默认配置进行合并的责任，从而生成最终的配置。这种设计方式可以方便用户进行自定义配置，并保证了默认配置和自定义配置的兼容性。
+  ```
+
+* RequestMappingHandlerAdapter 适配器模式，把不同的请求适配给对应的endpoint处理

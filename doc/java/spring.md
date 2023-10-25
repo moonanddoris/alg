@@ -93,6 +93,7 @@ https://blog.csdn.net/qq_27579471/article/details/106839223
   * spring-boot-autoconfigure支持自定义自动配置；其中可以指定加载顺序如 @AutoConfigureAfter @AutoConfigureBefore
   * 自动加载的原理 @SpringBootApplication -> @EnableAutoConfiguration -> @import -> EnableAutoConfigurationImportSelector -> SpringFactoriesLoader.loadFactoryNames方法进行扫描具有META-INF/spring.factories文件的jar包
   * 举个例子，如果未使用自动加载，需要在启动类上使用@MapperScan，如果使用了自动加载，则在自动配置类的地方 使用@MapperScan即可
+  * @EnableConfigurationProperties 指定配置类，可以手动指定不在扫描范围内的配置类
 
 ### 关于Spring生命周期
 
@@ -120,3 +121,7 @@ https://blog.csdn.net/qq_27579471/article/details/106839223
   ```
 
 * RequestMappingHandlerAdapter 适配器模式，把不同的请求适配给对应的endpoint处理
+
+
+### 其它
+* @ServletComponentScan可以指定类加载到servlet容器中

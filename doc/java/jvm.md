@@ -22,6 +22,11 @@
 * 使用jhat jvisualvm 来分析内存
 * jstat -gccapacity PID 查看gc详情
 
+### 如何查看目标线程
+* top -Hp pid 查看疑似的线程
+* printf "%x\n" tid 将线程id转化为16进制 8f7
+* jstack pid | grep 8f7  在堆栈信息中查看线程具体信息
+
 ### jvm优化思路
 
 * 本质上是减少GC的次数。

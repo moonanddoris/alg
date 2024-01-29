@@ -13,6 +13,10 @@
 * 需要应用在public方法上才可以生效
 * 传播行为默认为Propagation.REQUIRED，如有已有事务则加入，否则新建事务
 * Propagation.REQUIRES_NEW会建立新的事务，使用时需要明确场景。否则可能会读取不到新数据
+* 嵌套使用的时候要正确处理异常。常见的报错 Transaction rolled back because it has been marked as rollback-only   
+  往往是A调用B，B报错了异常，在A调用处catch之后，吞没掉异常了。这样在B上的AOP事务注解（和A是同一个事务），将事务设置为 rollback-only
+  B方法调用结束后，在A方法上的事务正常提交，但此时事务已经是rollback-only了，无法正常提交，所以报错。
+  本质原因是，嵌套事务注解，没有正确的使用，要搞清楚哪些事务需要保持一致；哪些事务需要开启新事务；
 
 ## Spring循环依赖
 

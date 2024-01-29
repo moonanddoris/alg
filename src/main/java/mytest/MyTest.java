@@ -5,6 +5,8 @@ import org.apache.commons.codec.binary.Base64;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +16,34 @@ import java.util.regex.Pattern;
  */
 public class MyTest {
 
+    public static String getColumnName(int columnIndex) {
+        StringBuilder columnName = new StringBuilder();
+
+        while (columnIndex > 0) {
+            int remainder = (columnIndex - 1) % 26;
+            columnName.insert(0, (char) (65 + remainder));
+            columnIndex = (columnIndex - 1) / 26;
+        }
+
+        return columnName.toString();
+    }
     public static void main(String[] args) {
+
+
+        System.out.println("111111111111");
+        System.out.println(String.format(null));
+
+
+        int columnIndex = 1;
+        int totalColumns = 50;
+        Map<Integer, String> columnMap = new HashMap<>();
+
+        for (int i = 0; i < totalColumns; i++) {
+            String columnName = getColumnName(columnIndex);
+            columnMap.put(columnIndex, columnName);
+            columnIndex++;
+        }
+
 
         BigDecimal num1 = new BigDecimal("0.03");
         BigDecimal num2 = new BigDecimal("100");
